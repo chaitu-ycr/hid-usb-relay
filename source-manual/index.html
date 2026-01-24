@@ -1,0 +1,2872 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="hid based usb relay package">
+      
+      
+        <meta name="author" content="chaitu-ycr">
+      
+      
+        <link rel="canonical" href="https://chaitu-ycr.github.io/hid-usb-relay/source-manual/">
+      
+      
+        <link rel="prev" href="..">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>source-manual - hid-usb-relay</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../_assets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#hid_usb_relay.usb_relay" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="hid-usb-relay" class="md-header__button md-logo" aria-label="hid-usb-relay" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            hid-usb-relay
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              source-manual
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/chaitu-ycr/hid-usb-relay" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    chaitu-ycr/hid-usb-relay
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="hid-usb-relay" class="md-nav__button md-logo" aria-label="hid-usb-relay" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    hid-usb-relay
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/chaitu-ycr/hid-usb-relay" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    chaitu-ycr/hid-usb-relay
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    source-manual
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    source-manual
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#hid_usb_relay.usb_relay" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        usb_relay
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hid_usb_relay.usb_relay--context-manager-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Context manager pattern
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hid_usb_relay.usb_relay.PlatformInfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PlatformInfo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PlatformInfo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hid_usb_relay.usb_relay.PlatformInfo.arch_bits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        arch_bits
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hid_usb_relay.usb_relay.RelayCommand" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RelayCommand
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hid_usb_relay.usb_relay.RelayCommandError" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RelayCommandError
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hid_usb_relay.usb_relay.RelayError" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RelayError
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hid_usb_relay.usb_relay.RelayState" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RelayState
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hid_usb_relay.usb_relay.RelayValidationError" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RelayValidationError
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hid_usb_relay.usb_relay.USBRelayDevice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        USBRelayDevice
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="USBRelayDevice">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hid_usb_relay.usb_relay.USBRelayDevice.__enter__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __enter__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hid_usb_relay.usb_relay.USBRelayDevice.__exit__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __exit__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hid_usb_relay.usb_relay.USBRelayDevice.get_relay_state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_relay_state
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hid_usb_relay.usb_relay.USBRelayDevice.get_state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_state
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hid_usb_relay.usb_relay.USBRelayDevice.set_state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        set_state
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hid_usb_relay.usb_relay.USBRelayDevice.turn_off" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        turn_off
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hid_usb_relay.usb_relay.USBRelayDevice.turn_off_all" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        turn_off_all
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hid_usb_relay.usb_relay.USBRelayDevice.turn_on" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        turn_on
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hid_usb_relay.usb_relay.USBRelayDevice.turn_on_all" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        turn_on_all
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hid_usb_relay.usb_relay.enumerate_devices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        enumerate_devices
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hid_usb_relay.usb_relay.get_all_relay_device_state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_all_relay_device_state
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hid_usb_relay.usb_relay.get_bin_directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_bin_directory
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hid_usb_relay.usb_relay.get_default_relay_device_relay_state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_default_relay_device_relay_state
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hid_usb_relay.usb_relay.get_default_relay_device_state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_default_relay_device_state
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hid_usb_relay.usb_relay.get_executable_path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_executable_path
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hid_usb_relay.usb_relay.get_platform_info" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_platform_info
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hid_usb_relay.usb_relay.get_relay_device_relay_state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_relay_device_relay_state
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hid_usb_relay.usb_relay.get_relay_device_state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_relay_device_state
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hid_usb_relay.usb_relay.set_default_relay_device_relay_state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        set_default_relay_device_relay_state
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hid_usb_relay.usb_relay.set_default_relay_device_state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        set_default_relay_device_state
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hid_usb_relay.usb_relay.set_relay_device_relay_state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        set_relay_device_relay_state
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hid_usb_relay.usb_relay.set_relay_device_state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        set_relay_device_state
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hid_usb_relay.app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        app
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hid_usb_relay.app.RelayController" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RelayController
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RelayController">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hid_usb_relay.app.RelayController.build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        build
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hid_usb_relay.app.RelayController.control_relay" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        control_relay
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hid_usb_relay.app.RelayController.refresh_status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        refresh_status
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hid_usb_relay.app.RelayController.scan_devices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        scan_devices
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hid_usb_relay.app.RelayService" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RelayService
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RelayService">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hid_usb_relay.app.RelayService.get_devices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_devices
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hid_usb_relay.app.RelayService.set_and_get_relay_state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        set_and_get_relay_state
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hid_usb_relay.app.ThemeManager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ThemeManager
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ThemeManager">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hid_usb_relay.app.ThemeManager.is_dark" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        is_dark
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hid_usb_relay.app.ThemeManager.apply" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        apply
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hid_usb_relay.app.ThemeManager.init" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        init
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hid_usb_relay.app.ThemeManager.register_cards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        register_cards
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hid_usb_relay.app.ThemeManager.text_class" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        text_class
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hid_usb_relay.app.ThemeManager.toggle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        toggle
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hid_usb_relay.app.default_relay_control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        default_relay_control
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hid_usb_relay.app.handle_rest_error" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        handle_rest_error
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hid_usb_relay.app.health_check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        health_check
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hid_usb_relay.app.index_page" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        index_page
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hid_usb_relay.app.list_relay_devices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        list_relay_devices
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hid_usb_relay.app.relay_control_by_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        relay_control_by_id
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+  <h1>source-manual</h1>
+
+<blockquote>
+<p><strong>Note:</strong> Documentation is work in progress.</p>
+</blockquote>
+<hr />
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="hid_usb_relay.usb_relay"></a>
+    <div class="doc doc-contents first">
+
+        <p>HID USB Relay Controller Module</p>
+<p>Provides an object-oriented interface for controlling HID USB relay devices
+via command-line executable. Supports multiple relay devices with proper
+error handling, validation, and reusability.</p>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <blockquote>
+<blockquote>
+<blockquote>
+<p>relay = USBRelayDevice()  # Default device
+relay.turn_on(1)
+relay.get_state()
+{'R1': 'ON', 'R2': 'OFF'}</p>
+<p>specific = USBRelayDevice(device_id='HURTM')
+specific.turn_on_all()</p>
+<h2 id="hid_usb_relay.usb_relay--context-manager-pattern">Context manager pattern</h2>
+<p>with USBRelayDevice('HURTM') as relay:
+...     relay.turn_on_all()</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</details>
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="hid_usb_relay.usb_relay.PlatformInfo" class="doc doc-heading">
+              <code class="highlight language-python"><span class="n">PlatformInfo</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">architecture</span><span class="p">)</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
+  </span>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+
+
+        <p>Platform and architecture information.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="hid_usb_relay.usb_relay.PlatformInfo.arch_bits" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">arch_bits</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Get architecture as bit string (32bit/64bit).</p>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="hid_usb_relay.usb_relay.RelayCommand" class="doc doc-heading">
+            <code>RelayCommand</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="enum.Enum">Enum</span></code></p>
+
+
+
+        <p>Available relay commands.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="hid_usb_relay.usb_relay.RelayCommandError" class="doc doc-heading">
+            <code>RelayCommandError</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="RelayError (hid_usb_relay.usb_relay.RelayError)" href="#hid_usb_relay.usb_relay.RelayError">RelayError</a></code></p>
+
+
+
+        <p>Raised when relay command execution fails.</p>
+
+
+
+
+
+
+
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="hid_usb_relay.usb_relay.RelayError" class="doc doc-heading">
+            <code>RelayError</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="Exception">Exception</span></code></p>
+
+
+
+        <p>Base exception for relay operations.</p>
+
+
+
+
+
+
+
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="hid_usb_relay.usb_relay.RelayState" class="doc doc-heading">
+            <code>RelayState</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="enum.Enum">Enum</span></code></p>
+
+
+
+        <p>Relay state enumeration.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="hid_usb_relay.usb_relay.RelayValidationError" class="doc doc-heading">
+            <code>RelayValidationError</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="RelayError (hid_usb_relay.usb_relay.RelayError)" href="#hid_usb_relay.usb_relay.RelayError">RelayError</a></code></p>
+
+
+
+        <p>Raised when input validation fails.</p>
+
+
+
+
+
+
+
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="hid_usb_relay.usb_relay.USBRelayDevice" class="doc doc-heading">
+              <code class="highlight language-python"><span class="n">USBRelayDevice</span><span class="p">(</span><span class="n">device_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">executable_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">DEFAULT_TIMEOUT</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+
+
+        <p>Interface for controlling a USB relay device.</p>
+<p>Supports context manager protocol for resource management patterns.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="hid_usb_relay.usb_relay.USBRelayDevice.device_id">device_id</span></code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Optional device ID. If None, uses default device.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <blockquote>
+<blockquote>
+<blockquote>
+<p>relay = USBRelayDevice(device_id='HURTM')
+relay.turn_on(1)
+relay.get_state()
+{'R1': 'ON', 'R2': 'OFF'}</p>
+<p>with USBRelayDevice('HURTM') as relay:
+...     relay.turn_on_all()</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</details>
+        <p>Initialize relay device controller.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>device_id</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="str">str</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Device ID. If None, controls the default device.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>executable_path</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="pathlib.Path">Path</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Custom path to relay executable. If None, auto-detects.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>timeout</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Command timeout in seconds.</p>
+              </div>
+            </td>
+            <td>
+                  <code><span title="hid_usb_relay.usb_relay.DEFAULT_TIMEOUT">DEFAULT_TIMEOUT</span></code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="hid_usb_relay.usb_relay.USBRelayDevice.__enter__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__enter__</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Context manager entry.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="hid_usb_relay.usb_relay.USBRelayDevice.__exit__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__exit__</span><span class="p">(</span><span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Context manager exit.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="hid_usb_relay.usb_relay.USBRelayDevice.get_relay_state" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_relay_state</span><span class="p">(</span><span class="n">relay_num</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Get state of a specific relay.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>relay_num</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="int">int</span>, <span title="str">str</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Relay number (1-based).</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>str</code></td>            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>"ON" or "OFF".</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayValidationError (hid_usb_relay.usb_relay.RelayValidationError)" href="#hid_usb_relay.usb_relay.RelayValidationError">RelayValidationError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If relay number is invalid.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayCommandError (hid_usb_relay.usb_relay.RelayCommandError)" href="#hid_usb_relay.usb_relay.RelayCommandError">RelayCommandError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If command fails.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayError (hid_usb_relay.usb_relay.RelayError)" href="#hid_usb_relay.usb_relay.RelayError">RelayError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If relay not found.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="hid_usb_relay.usb_relay.USBRelayDevice.get_state" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_state</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Get current state of all relays on this device.</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="typing.Dict">Dict</span>[<span title="str">str</span>, <span title="str">str</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Dict mapping relay names to states (e.g., {'R1': 'ON', 'R2': 'OFF'}).</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayCommandError (hid_usb_relay.usb_relay.RelayCommandError)" href="#hid_usb_relay.usb_relay.RelayCommandError">RelayCommandError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If command fails.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="hid_usb_relay.usb_relay.USBRelayDevice.set_state" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">set_state</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">relay_num</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Set relay state.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>state</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<a class="autorefs autorefs-internal" title="RelayState (hid_usb_relay.usb_relay.RelayState)" href="#hid_usb_relay.usb_relay.RelayState">RelayState</a>, <span title="str">str</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>RelayState.ON/OFF or "on"/"off"/"ON"/"OFF" string.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>relay_num</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="typing.Union">Union</span>[<span title="int">int</span>, <span title="str">str</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Optional relay number. If None, sets all relays.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayValidationError (hid_usb_relay.usb_relay.RelayValidationError)" href="#hid_usb_relay.usb_relay.RelayValidationError">RelayValidationError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If inputs are invalid.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayCommandError (hid_usb_relay.usb_relay.RelayCommandError)" href="#hid_usb_relay.usb_relay.RelayCommandError">RelayCommandError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If command fails.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="hid_usb_relay.usb_relay.USBRelayDevice.turn_off" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">turn_off</span><span class="p">(</span><span class="n">relay_num</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Turn off a specific relay.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="hid_usb_relay.usb_relay.USBRelayDevice.turn_off_all" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">turn_off_all</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Turn off all relays.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="hid_usb_relay.usb_relay.USBRelayDevice.turn_on" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">turn_on</span><span class="p">(</span><span class="n">relay_num</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Turn on a specific relay.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="hid_usb_relay.usb_relay.USBRelayDevice.turn_on_all" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">turn_on_all</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Turn on all relays.</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="hid_usb_relay.usb_relay.enumerate_devices" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">enumerate_devices</span><span class="p">()</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Enumerate all connected relay devices.</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td></td>            <td>
+                  <code><span title="typing.List">List</span>[<span title="typing.Dict">Dict</span>[<span title="str">str</span>, <span title="str">str</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of dicts containing device info and states.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+<td><code>Example</code></td>            <td>
+                  <code><span title="typing.List">List</span>[<span title="typing.Dict">Dict</span>[<span title="str">str</span>, <span title="str">str</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>[
+{'device_id': 'BITFT', 'R1': 'OFF', 'R2': 'OFF'},
+{'device_id': 'HURTM', 'R1': 'ON', 'R2': 'ON'}</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+<td></td>            <td>
+                  <code><span title="typing.List">List</span>[<span title="typing.Dict">Dict</span>[<span title="str">str</span>, <span title="str">str</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>]</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayCommandError (hid_usb_relay.usb_relay.RelayCommandError)" href="#hid_usb_relay.usb_relay.RelayCommandError">RelayCommandError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If enumeration fails.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="hid_usb_relay.usb_relay.get_all_relay_device_state" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_all_relay_device_state</span><span class="p">()</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>DEPRECATED: Use enumerate_devices() instead.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="hid_usb_relay.usb_relay.get_bin_directory" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_bin_directory</span><span class="p">(</span><span class="n">base_path</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Get the absolute path to the binaries folder.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>base_path</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="pathlib.Path">Path</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Optional custom base path. If None, uses module directory.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>Path</code></td>            <td>
+                  <code><span title="pathlib.Path">Path</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Path to the binary folder.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="hid_usb_relay.usb_relay.get_default_relay_device_relay_state" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_default_relay_device_relay_state</span><span class="p">(</span><span class="n">relay_number</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>DEPRECATED: Use USBRelayDevice().get_relay_state() instead.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="hid_usb_relay.usb_relay.get_default_relay_device_state" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_default_relay_device_state</span><span class="p">()</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>DEPRECATED: Use USBRelayDevice().get_state() instead.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="hid_usb_relay.usb_relay.get_executable_path" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_executable_path</span><span class="p">(</span><span class="n">base_path</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Get the path to the relay command-line executable.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>base_path</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="pathlib.Path">Path</span>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Optional custom base path for binaries. If None, uses cached default.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>Path</code></td>            <td>
+                  <code><span title="pathlib.Path">Path</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Full path to the relay executable.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayError (hid_usb_relay.usb_relay.RelayError)" href="#hid_usb_relay.usb_relay.RelayError">RelayError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If platform is unsupported or executable not found.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="hid_usb_relay.usb_relay.get_platform_info" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_platform_info</span><span class="p">()</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-cached"><code>cached</code></small>
+  </span>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Get cached platform information.</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>PlatformInfo</code></td>            <td>
+                  <code><a class="autorefs autorefs-internal" title="PlatformInfo(system, architecture)
+
+  
+      dataclass
+   (hid_usb_relay.usb_relay.PlatformInfo)" href="#hid_usb_relay.usb_relay.PlatformInfo">PlatformInfo</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Platform and architecture details.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="hid_usb_relay.usb_relay.get_relay_device_relay_state" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_relay_device_relay_state</span><span class="p">(</span><span class="n">relay_id</span><span class="p">,</span> <span class="n">relay_number</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>DEPRECATED: Use USBRelayDevice(device_id).get_relay_state() instead.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="hid_usb_relay.usb_relay.get_relay_device_state" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_relay_device_state</span><span class="p">(</span><span class="n">relay_id</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>DEPRECATED: Use USBRelayDevice(device_id).get_state() instead.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="hid_usb_relay.usb_relay.set_default_relay_device_relay_state" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">set_default_relay_device_relay_state</span><span class="p">(</span><span class="n">relay_number</span><span class="p">,</span> <span class="n">relay_state</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>DEPRECATED: Use USBRelayDevice().set_state() instead.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="hid_usb_relay.usb_relay.set_default_relay_device_state" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">set_default_relay_device_state</span><span class="p">(</span><span class="n">relay_state</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>DEPRECATED: Use USBRelayDevice().set_state() instead.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="hid_usb_relay.usb_relay.set_relay_device_relay_state" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">set_relay_device_relay_state</span><span class="p">(</span><span class="n">relay_id</span><span class="p">,</span> <span class="n">relay_number</span><span class="p">,</span> <span class="n">relay_state</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>DEPRECATED: Use USBRelayDevice(device_id).set_state() instead.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="hid_usb_relay.usb_relay.set_relay_device_state" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">set_relay_device_state</span><span class="p">(</span><span class="n">relay_id</span><span class="p">,</span> <span class="n">relay_state</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>DEPRECATED: Use USBRelayDevice(device_id).set_state() instead.</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="hid_usb_relay.app"></a>
+    <div class="doc doc-contents first">
+
+        <p>HID USB Relay Controller - Professional Web Interface</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="hid_usb_relay.app.RelayController" class="doc doc-heading">
+              <code class="highlight language-python"><span class="n">RelayController</span><span class="p">(</span><span class="n">theme</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+
+
+        <p>Manages the web UI for relay control and device management</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="hid_usb_relay.app.RelayController.build" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">build</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Build the complete UI with header, status bar, control panel, and device manager</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="hid_usb_relay.app.RelayController.control_relay" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">control_relay</span><span class="p">(</span><span class="n">state</span><span class="p">)</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Control relay state (ON/OFF) for specified device and relay number</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="hid_usb_relay.app.RelayController.refresh_status" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">refresh_status</span><span class="p">()</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Refresh and display current relay status</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="hid_usb_relay.app.RelayController.scan_devices" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">scan_devices</span><span class="p">()</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Scan for connected devices and update the device manager UI</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="hid_usb_relay.app.RelayService" class="doc doc-heading">
+            <code>RelayService</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+
+
+        <p>Service layer that encapsulates relay hardware operations</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="hid_usb_relay.app.RelayService.get_devices" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_devices</span><span class="p">()</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-staticmethod"><code>staticmethod</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Enumerate all connected relay devices</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="hid_usb_relay.app.RelayService.set_and_get_relay_state" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">set_and_get_relay_state</span><span class="p">(</span><span class="n">relay_id</span><span class="p">,</span> <span class="n">relay_number</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-staticmethod"><code>staticmethod</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Set relay state and return the updated state</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="hid_usb_relay.app.ThemeManager" class="doc doc-heading">
+              <code class="highlight language-python"><span class="n">ThemeManager</span><span class="p">()</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+
+
+        <p>Manages dark/light theme switching and applies styling to UI elements</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="hid_usb_relay.app.ThemeManager.is_dark" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">is_dark</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Check if dark mode is currently enabled</p>
+
+    </div>
+
+</div>
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="hid_usb_relay.app.ThemeManager.apply" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">apply</span><span class="p">(</span><span class="n">ui_controller</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Apply current theme to all registered UI elements</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="hid_usb_relay.app.ThemeManager.init" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">init</span><span class="p">(</span><span class="n">start_dark</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Initialize theme system with brand colors</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="hid_usb_relay.app.ThemeManager.register_cards" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">register_cards</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">control</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">toggle_row</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Register UI cards for theme application</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="hid_usb_relay.app.ThemeManager.text_class" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">text_class</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Get appropriate text color class for current theme</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="hid_usb_relay.app.ThemeManager.toggle" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">toggle</span><span class="p">(</span><span class="n">ui_controller</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Toggle between dark and light mode</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="hid_usb_relay.app.default_relay_control" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">default_relay_control</span><span class="p">(</span><span class="n">relay_number</span><span class="p">,</span> <span class="n">relay_state</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Control relay on default device</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="hid_usb_relay.app.handle_rest_error" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">handle_rest_error</span><span class="p">(</span><span class="n">func</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Decorator to handle REST API errors consistently</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="hid_usb_relay.app.health_check" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">health_check</span><span class="p">()</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Health check endpoint</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="hid_usb_relay.app.index_page" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">index_page</span><span class="p">()</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Main page - initialize theme and build UI</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="hid_usb_relay.app.list_relay_devices" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">list_relay_devices</span><span class="p">()</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>List all connected relay devices</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="hid_usb_relay.app.relay_control_by_id" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">relay_control_by_id</span><span class="p">(</span><span class="n">relay_id</span><span class="p">,</span> <span class="n">relay_number</span><span class="p">,</span> <span class="n">relay_state</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Control specific relay on specific device</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div><hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["toc.integrate", "search"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11.11.0/dist/mermaid.core.mjs" type="module"></script>
+      
+    
+  </body>
+</html>
