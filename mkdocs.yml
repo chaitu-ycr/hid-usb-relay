@@ -1,0 +1,39 @@
+site_name: hid-usb-relay
+site_url: https://chaitu-ycr.github.io/hid-usb-relay/
+site_description: "hid based usb relay package"
+site_author:  chaitu-ycr
+repo_name: "chaitu-ycr/hid-usb-relay"
+repo_url: https://github.com/chaitu-ycr/hid-usb-relay
+edit_uri: blob/main/
+
+nav:
+  - Home: index.md
+  - source-manual: source-manual.md
+
+plugins:
+  - mkdocstrings:
+      handlers:
+        python:
+          paths:
+            - src  # Root level src if any
+          options:
+            docstring_style: google
+            show_source: false
+            merge_init_into_class: true
+            show_docstring_modules: false
+  - include-markdown:
+      recursive: true
+  - macros
+  - search
+
+theme:
+  name: material
+  features:
+    - toc.integrate
+    - search
+
+extra_css:
+  - _assets/extra.css
+
+extra_javascript:
+  - https://unpkg.com/mermaid@11.11.0/dist/mermaid.core.mjs
