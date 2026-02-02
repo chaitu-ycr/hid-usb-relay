@@ -1,6 +1,6 @@
 [project]
 name = "hid-usb-relay"
-version = "26.0.0"
+version = "26.0.1"
 description = "hid based usb relay package"
 license = { file = "LICENSE" }
 readme = "README.md"
