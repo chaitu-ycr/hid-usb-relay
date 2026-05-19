@@ -19,7 +19,9 @@ classifiers = [
 ]
 
 dependencies = [
-    "nicegui[native]",
+    "fastapi",
+    "uvicorn",
+    "dearpygui",
 ]
 
 [dependency-groups]
