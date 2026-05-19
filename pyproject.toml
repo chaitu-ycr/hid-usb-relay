@@ -1,6 +1,6 @@
 [project]
 name = "hid-usb-relay"
-version = "26.0.2"
+version = "26.1.0"
 description = "hid based usb relay package"
 license = { file = "LICENSE" }
 readme = "README.md"
@@ -43,6 +43,11 @@ dev = [
     "mkdocs-include-markdown-plugin",
     "pymdown-extensions",
 ]
+
+[project.scripts]
+hid-usb-relay = "hid_usb_relay.app:main"
+hid-usb-relay-gui = "hid_usb_relay.app:run_gui_mode"
+hid-usb-relay-api = "hid_usb_relay.app:run_api_mode"
 
 [project.urls]
 homepage = "https://github.com/chaitu-ycr/hid-usb-relay"

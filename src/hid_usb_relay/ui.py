@@ -67,24 +67,24 @@ def run_gui() -> None:
 
     dpg.bind_theme(global_theme)
 
-    with dpg.window(label="HID USB Relay • Control Center", width=980, height=700):
-        dpg.add_text("Modern Desktop Relay Controller", color=(0, 230, 200, 255))
+    with dpg.window(label="HID USB Relay - Control Center", width=410, height=385):
+        dpg.add_text("Control Relays Here", color=(0, 230, 200, 255))
         dpg.add_separator()
 
         with dpg.group(horizontal=True):
             dpg.add_text("Device")
-            dpg.add_combo(["Default"], default_value="Default", width=220, tag="device_combo")
+            dpg.add_combo(["Default"], default_value="Default", width=120, tag="device_combo")
             dpg.add_button(label="Scan Devices", callback=lambda: _scan_devices())
 
         with dpg.group(horizontal=True):
             dpg.add_text("Relay")
-            dpg.add_input_text(default_value="all", width=120, tag="relay_input")
+            dpg.add_input_text(default_value="all", width=90, tag="relay_input")
             dpg.add_button(label="TURN ON", callback=lambda: _control("on"))
             dpg.add_button(label="TURN OFF", callback=lambda: _control("off"))
 
         dpg.add_spacer(height=8)
         dpg.add_text("status", tag="status_text", color=(180, 200, 255, 255))
-        dpg.add_input_text(tag="output_text", multiline=True, readonly=True, width=-1, height=120)
+        dpg.add_input_text(tag="output_text", multiline=True, readonly=True, width=-1, height=60)
 
         dpg.add_spacer(height=8)
         dpg.add_text("Discovered Devices", color=(255, 215, 120, 255))
@@ -93,7 +93,7 @@ def run_gui() -> None:
             dpg.add_table_column(label="Device ID", width_stretch=True)
             dpg.add_table_column(label="Relay States", width_stretch=True)
 
-    dpg.create_viewport(title="HID USB Relay", width=1000, height=760)
+    dpg.create_viewport(title="HID USB Relay", width=430, height=430)
     dpg.setup_dearpygui()
     dpg.show_viewport()
     _scan_devices()
