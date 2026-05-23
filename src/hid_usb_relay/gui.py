@@ -19,7 +19,8 @@ class HIDUSBRelayGUI:
     ]
 
     def __init__(self) -> None:
-        self.service, self._dpg = RelayService(), None
+        self.service = RelayService()
+        self._dpg = None
 
     @property
     def dpg(self) -> Any:
@@ -78,17 +79,31 @@ class HIDUSBRelayGUI:
         dpg.create_context()
         dpg.bind_theme(self._create_theme())
         with dpg.window(label='HID USB Relay - Control Center', width=410, height=385):
-            dpg.add_text('Control Relays Here', color=(0, 230, 200, 255)); dpg.add_separator()
+            dpg.add_text('Control Relays Here', color=(0, 230, 200, 255))
+            dpg.add_separator()
             with dpg.group(horizontal=True):
-                dpg.add_text('Device'); dpg.add_combo(['Default'], default_value='Default', width=120, tag='device_combo'); dpg.add_button(label='Scan Devices', callback=lambda: self._scan_devices())
+                dpg.add_text('Device')
+                dpg.add_combo(['Default'], default_value='Default', width=120, tag='device_combo')
+                dpg.add_button(label='Scan Devices', callback=lambda: self._scan_devices())
             with dpg.group(horizontal=True):
-                dpg.add_text('Relay'); dpg.add_input_text(default_value='all', width=90, tag='relay_input'); dpg.add_button(label='TURN ON', callback=lambda: self._control('on')); dpg.add_button(label='TURN OFF', callback=lambda: self._control('off'))
-            dpg.add_spacer(height=8); dpg.add_text('status', tag='status_text', color=(180, 200, 255, 255)); dpg.add_input_text(tag='output_text', multiline=True, readonly=True, width=-1, height=60)
-            dpg.add_spacer(height=8); dpg.add_text('Discovered Devices', color=(255, 215, 120, 255))
+                dpg.add_text('Relay')
+                dpg.add_input_text(default_value='all', width=90, tag='relay_input')
+                dpg.add_button(label='TURN ON', callback=lambda: self._control('on'))
+                dpg.add_button(label='TURN OFF', callback=lambda: self._control('off'))
+            dpg.add_spacer(height=8)
+            dpg.add_text('status', tag='status_text', color=(180, 200, 255, 255))
+            dpg.add_input_text(tag='output_text', multiline=True, readonly=True, width=-1, height=60)
+            dpg.add_spacer(height=8)
+            dpg.add_text('Discovered Devices', color=(255, 215, 120, 255))
             with dpg.table(header_row=True, resizable=True, borders_innerH=True, borders_outerH=True, borders_innerV=True, borders_outerV=True, row_background=True, tag='device_table'):
-                dpg.add_table_column(label='Device ID', width_stretch=True); dpg.add_table_column(label='Relay States', width_stretch=True)
+                dpg.add_table_column(label='Device ID', width_stretch=True)
+                dpg.add_table_column(label='Relay States', width_stretch=True)
         dpg.create_viewport(title='HID USB Relay', width=430, height=430)
-        dpg.setup_dearpygui(); dpg.show_viewport(); self._scan_devices(); dpg.start_dearpygui(); dpg.destroy_context()
+        dpg.setup_dearpygui()
+        dpg.show_viewport()
+        self._scan_devices()
+        dpg.start_dearpygui()
+        dpg.destroy_context()
 
 
 def run_gui() -> None:
