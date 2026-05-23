@@ -1,6 +1,4 @@
-"""Entry point for running hid_usb_relay as a module."""
-
-from hid_usb_relay.app import main
+from hid_usb_relay.cli import run_cli
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(run_cli())

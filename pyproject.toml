@@ -28,12 +28,7 @@ dependencies = [
 dev = [
     "pyinstaller",
     "ruff",
-    "pytest",
-    "pytest-html",
-    "pytest-sugar",
-    "pytest-clarity",
-    "pytest-cov",
-    "pytest-watch",
+    "mkdocs<2.0",
     "mkdocs-puml",
     "mkdocs-exclude",
     "mkdocs-material<10",
@@ -45,9 +40,9 @@ dev = [
 ]
 
 [project.scripts]
-hid-usb-relay = "hid_usb_relay.app:main"
-hid-usb-relay-gui = "hid_usb_relay.app:run_gui_mode"
-hid-usb-relay-api = "hid_usb_relay.app:run_api_mode"
+hid-usb-relay-cli = "hid_usb_relay.cli:run_cli"
+hid-usb-relay-gui = "hid_usb_relay.gui:run_gui"
+hid-usb-relay-api = "hid_usb_relay.api:run_api"
 
 [project.urls]
 homepage = "https://github.com/chaitu-ycr/hid-usb-relay"
