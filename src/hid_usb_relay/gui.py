@@ -1,28 +1,23 @@
+"""DearPyGui-based desktop GUI for HID USB relay control."""
+
 from typing import Any
+
 from hid_usb_relay.usb_relay import RelayError, RelayService
 
 __all__ = ['HIDUSBRelayGUI', 'run_gui']
 
-_THEME_STYLES = [
-    ('mvStyleVar_WindowRounding', 10), ('mvStyleVar_FrameRounding', 8), ('mvStyleVar_ItemSpacing', 10, 8),
-]
-_THEME_COLORS = [
-    ('mvThemeCol_WindowBg', (18, 22, 38, 255)), ('mvThemeCol_ChildBg', (30, 35, 58, 255)),
-    ('mvThemeCol_Button', (91, 84, 255, 255)), ('mvThemeCol_ButtonHovered', (119, 113, 255, 255)),
-    ('mvThemeCol_FrameBg', (38, 45, 75, 255)), ('mvThemeCol_Header', (0, 191, 166, 190)),
-    ('mvThemeCol_TitleBgActive', (22, 163, 74, 255)), ('mvThemeCol_Text', (235, 241, 255, 255)),
-]
-
-
-def _import_dpg() -> Any:
-    try:
-        import dearpygui.dearpygui as dpg
-        return dpg
-    except ModuleNotFoundError as exc:
-        raise ImportError('DearPyGui is required to run the GUI. Install dearpygui.') from exc
-
 
 class HIDUSBRelayGUI:
+    """GUI application that owns widgets, theme, and relay operations."""
+
+    THEME_STYLES = [('mvStyleVar_WindowRounding', 10), ('mvStyleVar_FrameRounding', 8), ('mvStyleVar_ItemSpacing', 10, 8)]
+    THEME_COLORS = [
+        ('mvThemeCol_WindowBg', (18, 22, 38, 255)), ('mvThemeCol_ChildBg', (30, 35, 58, 255)),
+        ('mvThemeCol_Button', (91, 84, 255, 255)), ('mvThemeCol_ButtonHovered', (119, 113, 255, 255)),
+        ('mvThemeCol_FrameBg', (38, 45, 75, 255)), ('mvThemeCol_Header', (0, 191, 166, 190)),
+        ('mvThemeCol_TitleBgActive', (22, 163, 74, 255)), ('mvThemeCol_Text', (235, 241, 255, 255)),
+    ]
+
     def __init__(self) -> None:
         self.service = RelayService()
         self._dpg = None
@@ -30,20 +25,28 @@ class HIDUSBRelayGUI:
     @property
     def dpg(self) -> Any:
         if self._dpg is None:
-            self._dpg = _import_dpg()
+            try:
+                import dearpygui.dearpygui as dpg
+
+                self._dpg = dpg
+            except ModuleNotFoundError as exc:
+                raise ImportError('DearPyGui is required to run the GUI. Install dearpygui.') from exc
         return self._dpg
 
     def _set_status(self, text: str, color=(200, 220, 255, 255)) -> None:
         self.dpg.set_value('status_text', text)
         self.dpg.configure_item('status_text', color=color)
 
+    def _selected_relay_id(self) -> str | None:
+        selected = self.dpg.get_value('device_combo')
+        return None if selected == 'Default' else selected
+
     def _scan_devices(self) -> None:
         try:
             devices = self.service.get_devices()
             ids = ['Default'] + [d['device_id'] for d in devices if d.get('device_id')]
             self.dpg.configure_item('device_combo', items=ids)
-            if ids:
-                self.dpg.set_value('device_combo', ids[0])
+            self.dpg.set_value('device_combo', ids[0])
             self.dpg.delete_item('device_table', children_only=True, slot=1)
             for dev in devices:
                 with self.dpg.table_row(parent='device_table'):
@@ -55,10 +58,9 @@ class HIDUSBRelayGUI:
 
     def _control(self, state: str) -> None:
         relay_number = self.dpg.get_value('relay_input').strip().lower()
-        relay_id = None if self.dpg.get_value('device_combo') == 'Default' else self.dpg.get_value('device_combo')
         try:
-            result = self.service.set_and_get_relay_state(relay_id, relay_number, state)
-            self._set_status(f'{relay_id or "Default"} relay {relay_number} => {state.upper()}', (120, 255, 170, 255))
+            result = self.service.set_and_get_relay_state(self._selected_relay_id(), relay_number, state)
+            self._set_status(f'{self._selected_relay_id() or "Default"} relay {relay_number} => {state.upper()}', (120, 255, 170, 255))
             self.dpg.set_value('output_text', str(result.relay_state))
         except RelayError as exc:
             self._set_status(str(exc), (255, 120, 120, 255))
@@ -66,17 +68,16 @@ class HIDUSBRelayGUI:
     def _create_theme(self) -> int:
         with self.dpg.theme() as theme:
             with self.dpg.theme_component(self.dpg.mvAll):
-                for item in _THEME_STYLES:
+                for item in self.THEME_STYLES:
                     self.dpg.add_theme_style(getattr(self.dpg, item[0]), *item[1:])
-                for color, value in _THEME_COLORS:
+                for color, value in self.THEME_COLORS:
                     self.dpg.add_theme_color(getattr(self.dpg, color), value)
         return theme
 
     def run(self) -> None:
         dpg = self.dpg
         dpg.create_context()
-        theme = self._create_theme()
-        dpg.bind_theme(theme)
+        dpg.bind_theme(self._create_theme())
         with dpg.window(label='HID USB Relay - Control Center', width=410, height=385):
             dpg.add_text('Control Relays Here', color=(0, 230, 200, 255))
             dpg.add_separator()
@@ -106,4 +107,6 @@ class HIDUSBRelayGUI:
 
 
 def run_gui() -> None:
+    """Run the desktop GUI application."""
+
     HIDUSBRelayGUI().run()
