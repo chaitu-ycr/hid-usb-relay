@@ -1,6 +1,6 @@
 [project]
 name = "hid-usb-relay"
-version = "26.0.2"
+version = "26.1.0"
 description = "hid based usb relay package"
 license = { file = "LICENSE" }
 readme = "README.md"
@@ -19,19 +19,16 @@ classifiers = [
 ]
 
 dependencies = [
-    "nicegui[native]",
+    "fastapi",
+    "uvicorn",
+    "dearpygui",
 ]
 
 [dependency-groups]
 dev = [
     "pyinstaller",
     "ruff",
-    "pytest",
-    "pytest-html",
-    "pytest-sugar",
-    "pytest-clarity",
-    "pytest-cov",
-    "pytest-watch",
+    "mkdocs<2.0",
     "mkdocs-puml",
     "mkdocs-exclude",
     "mkdocs-material<10",
@@ -41,6 +38,11 @@ dev = [
     "mkdocs-include-markdown-plugin",
     "pymdown-extensions",
 ]
+
+[project.scripts]
+hid-usb-relay-cli = "hid_usb_relay.cli:run_cli"
+hid-usb-relay-gui = "hid_usb_relay.gui:run_gui"
+hid-usb-relay-api = "hid_usb_relay.api:run_api"
 
 [project.urls]
 homepage = "https://github.com/chaitu-ycr/hid-usb-relay"

@@ -2,13 +2,17 @@ site_name: hid-usb-relay
 site_url: https://chaitu-ycr.github.io/hid-usb-relay/
 site_description: "hid based usb relay package"
 site_author:  chaitu-ycr
-repo_name: "chaitu-ycr/hid-usb-relay"
+repo_name: ""
 repo_url: https://github.com/chaitu-ycr/hid-usb-relay
 edit_uri: blob/main/
 
 nav:
   - Home: index.md
-  - source-manual: source-manual.md
+  - Source Manual: source-manual.md
+  - USB Relay: usb_relay.md
+  - API: api.md
+  - CLI: cli.md
+  - GUI: gui.md
 
 plugins:
   - mkdocstrings:
@@ -18,16 +22,16 @@ plugins:
             - src  # Root level src if any
           options:
             docstring_style: google
-            show_source: false
+            show_source: true
             merge_init_into_class: true
-            show_docstring_modules: false
+            show_docstring_modules: true
   - include-markdown:
       recursive: true
   - macros
   - search
 
 theme:
-  name: material
+  name: readthedocs
   features:
     - toc.integrate
     - search
