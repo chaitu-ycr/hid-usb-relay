@@ -7,13 +7,7 @@ A Python package for controlling HID USB relay devices with an API, CLI, or desk
 Install from the repository root:
 
 ```bash
-pip install .
-```
-
-Or install in editable mode during development:
-
-```bash
-pip install -e .
+pip install hid-usb-relay
 ```
 
 ## Command line entry points
