@@ -29,7 +29,7 @@ class RelayAPI:
 
     def __init__(self) -> None:
         self.service = RelayService()
-        self.app = FastAPI(title='HID USB Relay API', version='26.1.0')
+        self.app = FastAPI(title='HID USB Relay API', version='26.1.2')
         self._bind_routes()
 
     def _guard(self, fn: Any, *args: Any, status_code: int = 400) -> Any:
