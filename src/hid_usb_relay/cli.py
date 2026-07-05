@@ -1,7 +1,6 @@
 """Command-line interface for HID USB relay operations."""
 
 from __future__ import annotations
-
 import argparse
 import json
 import sys
@@ -65,10 +64,8 @@ class RelayCLI:
             print(f'Error: {exc}', file=sys.stderr)
             return 1
 
-
 def run_cli(argv: Sequence[str] | None = None) -> int:
     """Entrypoint compatible wrapper for packaging scripts."""
-
     return RelayCLI().run(argv)
 
 

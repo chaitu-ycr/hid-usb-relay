@@ -1,12 +1,10 @@
 """FastAPI application surface for HID USB relay control."""
 
 from __future__ import annotations
-
-from typing import Any, Literal, Optional
-
-import uvicorn
 from fastapi import FastAPI, HTTPException, Query
 from pydantic import BaseModel, Field
+from typing import Any, Literal, Optional
+import uvicorn
 
 from hid_usb_relay.usb_relay import RelayError, RelayService
 
@@ -105,12 +103,13 @@ class RelayAPI:
             result = self._guard(self.service.get_state, payload.relay_id, payload.relay_number)
             return self._relay_state_response(result.relay_state)
 
-
 _API = RelayAPI()
 app = _API.app
 
-
 def run_api(host: str = '0.0.0.0', port: int = 9400) -> None:
     """Run API server using uvicorn."""
-
     uvicorn.run(app, host=host, port=port)
+
+
+if __name__ == '__main__':
+    run_api()

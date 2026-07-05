@@ -78,7 +78,7 @@ class HIDUSBRelayGUI:
         dpg = self.dpg
         dpg.create_context()
         dpg.bind_theme(self._create_theme())
-        with dpg.window(label='HID USB Relay - Control Center', width=410, height=385):
+        with dpg.window(label='HID USB Relay - Control Center', tag='primary_window', width=410, height=385):
             dpg.add_text('Control Relays Here', color=(0, 230, 200, 255))
             dpg.add_separator()
             with dpg.group(horizontal=True):
@@ -102,11 +102,14 @@ class HIDUSBRelayGUI:
         dpg.setup_dearpygui()
         dpg.show_viewport()
         self._scan_devices()
+        dpg.set_primary_window("primary_window", True)
         dpg.start_dearpygui()
         dpg.destroy_context()
 
-
 def run_gui() -> None:
     """Run the desktop GUI application."""
-
     HIDUSBRelayGUI().run()
+
+
+if __name__ == "__main__":
+    run_gui()
