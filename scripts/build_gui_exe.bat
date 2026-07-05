@@ -1,51 +1,176 @@
 @echo off
-setlocal enabledelayedexpansion
-pushd %~dp0\.. || exit /b 1
+setlocal EnableExtensions
 
-set "PROJECT_ROOT=%cd%"
+REM ==========================================================
+REM HID USB Relay GUI Build Script
+REM ==========================================================
+
+pushd "%~dp0\.." || (
+    echo ERROR: Unable to locate project root.
+    exit /b 1
+)
+
+set "PROJECT_ROOT=%CD%"
+set "PYTHON=%PROJECT_ROOT%\.venv\Scripts\python.exe"
+set "ENTRY_POINT=%PROJECT_ROOT%\src\hid_usb_relay\gui.py"
+
 set "DIST_DIR=%PROJECT_ROOT%\dist"
 set "BUILD_DIR=%PROJECT_ROOT%\build"
-set "SPEC_DIR=%BUILD_DIR%"
-set "ENTRY_POINT=src\hid_usb_relay\gui.py"
+set "SPEC_DIR=%PROJECT_ROOT%\spec"
 
-for /f "usebackq delims=" %%V in (`powershell -NoProfile -Command "Get-Content '%PROJECT_ROOT%\pyproject.toml' | Select-String -Pattern '^\s*version\s*=\s*\"([^\"]+)\"' | ForEach-Object { $_.Matches[0].Groups[1].Value }"`) do set "PACKAGE_VERSION=%%V"
-if not defined PACKAGE_VERSION echo ERROR: Could not read package version from pyproject.toml.& popd & exit /b 1
+REM ==========================================================
+REM Verify project files
+REM ==========================================================
+
+if not exist "%PROJECT_ROOT%\pyproject.toml" (
+    echo ERROR: pyproject.toml not found.
+    goto :ERROR
+)
+
+if not exist "%ENTRY_POINT%" (
+    echo ERROR: Entry point not found:
+    echo %ENTRY_POINT%
+    goto :ERROR
+)
+
+REM ==========================================================
+REM Create virtual environment if needed
+REM ==========================================================
+
+if not exist "%PYTHON%" (
+    echo Creating virtual environment...
+
+    call "%PROJECT_ROOT%\scripts\venv_setup.bat"
+    if errorlevel 1 goto :ERROR
+)
+
+if not exist "%PYTHON%" (
+    echo ERROR: Python executable not found.
+    goto :ERROR
+)
+
+REM ==========================================================
+REM Verify PyInstaller
+REM ==========================================================
+
+"%PYTHON%" -m PyInstaller --version >nul 2>&1
+
+if errorlevel 1 (
+    echo ERROR: PyInstaller is not installed.
+    goto :ERROR
+)
+
+REM ==========================================================
+REM Read version from pyproject.toml
+REM ==========================================================
+
+set "VERSION_FILE=%TEMP%\hid_usb_relay_version.txt"
+set "PACKAGE_VERSION="
+
+"%PYTHON%" -c "import tomllib;print(tomllib.load(open('pyproject.toml','rb'))['project']['version'])" > "%VERSION_FILE%"
+
+if errorlevel 1 (
+    echo ERROR: Failed to read version from pyproject.toml.
+    if exist "%VERSION_FILE%" del "%VERSION_FILE%"
+    goto :ERROR
+)
+
+set /p PACKAGE_VERSION=<"%VERSION_FILE%"
+del "%VERSION_FILE%" >nul 2>&1
+
+if not defined PACKAGE_VERSION (
+    echo ERROR: Version not found.
+    goto :ERROR
+)
 
 set "OUTPUT_NAME=hid-usb-relay-gui-v%PACKAGE_VERSION%"
-set "ZIP_PATH=%DIST_DIR%\%OUTPUT_NAME%.exe.zip"
+set "EXE_PATH=%DIST_DIR%\%OUTPUT_NAME%.exe"
+set "ZIP_PATH=%DIST_DIR%\%OUTPUT_NAME%.zip"
 
-if not exist "%PROJECT_ROOT%\.venv\Scripts\python.exe" (
-    echo Creating virtual environment...
-    call "%PROJECT_ROOT%\scripts\venv_setup.bat" || goto :ERR
-)
+echo.
+echo ==========================================================
+echo Building Version %PACKAGE_VERSION%
+echo ==========================================================
+echo.
 
-set "PYTHON=%PROJECT_ROOT%\.venv\Scripts\python.exe"
-if not exist "%PYTHON%" goto :ERR
-
-"%PYTHON%" -m pyinstaller --version >nul 2>nul || (
-    echo Installing build dependencies...
-    call "%PROJECT_ROOT%\scripts\venv_setup.bat" || goto :ERR
-    "%PYTHON%" -m pyinstaller --version >nul 2>nul || goto :ERR
-)
+REM ==========================================================
+REM Clean previous build
+REM ==========================================================
 
 if exist "%DIST_DIR%" rd /s /q "%DIST_DIR%"
 if exist "%BUILD_DIR%" rd /s /q "%BUILD_DIR%"
-mkdir "%DIST_DIR%" >nul 2>nul
+if exist "%SPEC_DIR%" rd /s /q "%SPEC_DIR%"
 
-"%PYTHON%" -m pyinstaller --noconfirm --clean --noconsole --onefile --name "%OUTPUT_NAME%" --distpath "%DIST_DIR%" --workpath "%BUILD_DIR%" --specpath "%SPEC_DIR%" --hidden-import dearpygui.dearpygui "%ENTRY_POINT%" || goto :ERR
-if not exist "%DIST_DIR%\%OUTPUT_NAME%.exe" goto :ERR
+mkdir "%DIST_DIR%" || goto :ERROR
+mkdir "%BUILD_DIR%" || goto :ERROR
+mkdir "%SPEC_DIR%" || goto :ERROR
 
-powershell -NoProfile -Command "Compress-Archive -Path '%DIST_DIR%\%OUTPUT_NAME%.exe' -DestinationPath '%ZIP_PATH%' -Force" || goto :ERR
+REM ==========================================================
+REM Build executable
+REM ==========================================================
 
-echo Build complete.
-echo Executable: %DIST_DIR%\%OUTPUT_NAME%.exe
-echo Archive: %ZIP_PATH%
+"%PYTHON%" -m PyInstaller ^
+    --clean ^
+    --noconfirm ^
+    --onefile ^
+    --noconsole ^
+    --name "%OUTPUT_NAME%" ^
+    --distpath "%DIST_DIR%" ^
+    --workpath "%BUILD_DIR%" ^
+    --specpath "%SPEC_DIR%" ^
+    --hidden-import dearpygui.dearpygui ^
+    "%ENTRY_POINT%"
+
+if errorlevel 1 goto :ERROR
+
+if not exist "%EXE_PATH%" (
+    echo ERROR: Executable was not created.
+    goto :ERROR
+)
+
+REM ==========================================================
+REM Create ZIP
+REM ==========================================================
+
+where tar >nul 2>&1
+
+if errorlevel 1 (
+    echo ERROR: Windows tar.exe not found.
+    goto :ERROR
+)
+
+if exist "%ZIP_PATH%" del /f /q "%ZIP_PATH%"
+
+tar -a -c -f "%ZIP_PATH%" -C "%DIST_DIR%" "%OUTPUT_NAME%.exe"
+
+if errorlevel 1 (
+    echo ERROR: Failed to create ZIP archive.
+    goto :ERROR
+)
+
+echo.
+echo ==========================================================
+echo BUILD SUCCESSFUL
+echo ==========================================================
+echo.
+echo Executable:
+echo     %EXE_PATH%
+echo.
+echo Archive:
+echo     %ZIP_PATH%
+echo.
+
 popd
 endlocal
 exit /b 0
 
-:ERR
-echo ERROR: Build failed.
+:ERROR
+
+echo.
+echo ==========================================================
+echo BUILD FAILED
+echo ==========================================================
+
 popd
 endlocal
 exit /b 1
