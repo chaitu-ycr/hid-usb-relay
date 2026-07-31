@@ -95,7 +95,7 @@ hid-usb-relay-gui
 
 This opens a simple Dear PyGui window for scanning devices, selecting a relay, and toggling relay state.
 
-![hid-usb-relay-gui](https://github.com/chaitu-ycr/hid-usb-relay/blob/main/docs/_assets/hid_usb_relay_gui.png?raw=true)
+![hid-usb-relay-gui](https://github.com/auto-py-utils/hid-usb-relay/blob/main/docs/_assets/hid_usb_relay_gui.png?raw=true)
 
 ## Python usage
 
@@ -124,4 +124,4 @@ print(result.relay_state)
 
 ## Source manual
 
-For more documentation, see the [source manual](https://chaitu-ycr.github.io/hid-usb-relay/source-manual).
+For more documentation, see the [source manual](https://auto-py-utils.github.io/hid-usb-relay/source-manual).

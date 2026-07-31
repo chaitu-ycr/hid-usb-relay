@@ -1,9 +1,9 @@
 site_name: hid-usb-relay
-site_url: https://chaitu-ycr.github.io/hid-usb-relay/
+site_url: https://auto-py-utils.github.io/hid-usb-relay/
 site_description: "hid based usb relay package"
-site_author:  chaitu-ycr
+site_author:  auto-py-utils
 repo_name: ""
-repo_url: https://github.com/chaitu-ycr/hid-usb-relay
+repo_url: https://github.com/auto-py-utils/hid-usb-relay
 edit_uri: blob/main/
 
 nav:
